@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>  
+	<!--executing a default launch file provided by Gazebo, and tell it to load our world file and show the Gazebo client-->
+	<arg name="robot" default="machines"/>
+	<arg name="debug" default="false"/>
+	<arg name="gui" default="true"/>
+	<arg name="headless" default="false"/>
+	<arg name="pause" default="false"/>
+	<arg name="world" default="com760World" />
+
+	<include file="$(find gazebo_ros)/launch/empty_world.launch">
+	  <arg name="world_name" value="$(find com760_b00885866)/world/$(arg world).world"/>
+	  
+	  <!--arg name="world_name" value ="$(arg world)" /-->	    
+	  <arg name="debug" value="$(arg debug)" />
+	  <arg name="gui" value="$(arg gui)" />
+	  <arg name="paused" value="$(arg pause)"/>
+	  <arg name="use_sim_time" value="true"/>
+	  <arg name="headless" value="$(arg headless)"/>  
+	</include>
+		
+   
+
+    <arg name="x" default="9"/>
+    <arg name="y" default="1"/>
+    <arg name="z" default="-2"/>
+    <arg name="roll" default="0"/>
+	<arg name="pitch" default="0"/>
+	<arg name="yaw" default="0"/>
+
+	<!--use a small script called spawn_model to make a service call request to the gazebo_ros ROS node-->
+	<!-- to add a custom URDF specified in the robot_description parameter -->
+   
+	 <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" output="screen" args="-file $(find com760_b00885866)/urdf/com760Bot.urdf -urdf -model b00885866Bot -x $(arg x) -y $(arg y) -z $(arg z)" />"
+
+    <arg name="initial_x" default="0" />
+    <arg name="initial_y" default="7" />
+    <arg name="des_x" default="-6" />
+    <arg name="des_y" default="-1" />
+    <param name="initial_x" value="$(arg initial_x)" />
+    <param name="initial_y" value="$(arg initial_y)" />
+    <param name="des_pos_x" value="$(arg des_x)" />
+    <param name="des_pos_y" value="$(arg des_y)" />
+    <node pkg="com760_b00885866" type="follow_wall_service.py" name="wall_follower" />
+    <node pkg="com760_b00885866" type="go_to_point_service.py" name="go_to_point" />
+    <node pkg="com760_b00885866" type="bug2.py" name="bug2" output="screen" />
+</launch>

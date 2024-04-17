@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<robot>
+	<material name="blue">
+		<color rgba="0.203125 0.23828125 0.28515625 1.0" />
+	</material>
+
+	<material name="orange">
+		<color rgba="1.0 0.423529411765 0.0392156862745 1.0" />
+	</material>
+</robot>

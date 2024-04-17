@@ -1,0 +1,25 @@
+<launch>
+
+<node pkg="turtlesim" type="turtlesim_node" name="sim" output="screen" />
+
+<node name="turtle1_tf_broadcaster" pkg="com760_b00885866" type="turtle_tf2_broadcaster.py" respawn="false" output="screen" >
+<param name="turtle" type="string" value="turtle1" />
+</node>
+
+<node name="turtle1_rotate" pkg="com760_b00885866" type="rotate.py" output="screen"/>
+
+<node name="turtle2_tf_broadcaster" pkg="com760_b00885866" type="turtle_tf2_broadcaster.py" respawn="false" output="screen" >
+<param name="turtle" type="string" value="followerA" />
+</node>
+
+<node name="turtle3_tf_broadcaster" pkg="com760_b00885866" type="turtle_tf2_broadcaster.py" respawn="false" output="screen" >
+<param name="turtle" type="string" value="followerB" />
+</node>
+
+<node pkg="com760_b00885866" type="turtle_tf2_listener.py" name="turtle_tf2_listener" />
+
+<node pkg="com760_b00885866" type="turtle_tf2_listener2.py" name="turtle_tf2_listener2" />
+
+<node pkg="com760_b00885866" type="move_spiral.py" name="turtlebot_controller" />
+
+</launch>
